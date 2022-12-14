@@ -1,0 +1,90 @@
+{{extend 'layout.html'}}
+{{if events:}}
+<div class="card bg-danger text-white modif">
+<h4 class="card-header modif-back-col">
+    {{=name}} events
+</h4>
+<table>
+    <thead>
+        <tr>
+           <th class='under text-center' scope="col">
+               Id
+           </th>
+           <th class='under text-center' scope="col">
+               Date
+           </th>
+           <th class='under text-center' scope="col">
+               Time
+           </th>
+           <th class='under text-left hidden' scope="col">
+               Type
+           </th>
+           <th class='under text-center' scope="col">
+               Status
+           </th>
+           <th class='under text-left hidden' scope="col">
+               Notes
+           </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{for event in events:}}
+        {{
+            #making a list of 24hrs in the 12hrs format
+            time_list = [12,1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11]
+        
+            #converting from 24hrs to 12hrs by index the time_list using the hr sliced from str(event.event_time)
+            hr = time_list[int(str(event.event_time)[0:2])]
+        
+            #comparing the sliced hr to determine whether to add "AM" or "PM"
+            if int(str(event.event_time)[0:2]) < 12:
+                if hr < 10:
+                    hr="0" + str(hr)
+                pass
+                event_time =  str(hr) + " " + str(event.event_time)[2:3] + " " + str(event.event_time)[3:5] + " " + 'AM'
+            else:
+                if hr < 10:
+                    hr="0" + str(hr)
+                pass
+                event_time= str(hr) + " " + str(event.event_time)[2:3] + " " + str(event.event_time)[3:5] + " " + "PM"
+            pass
+            
+            #formatting date to "mm/dd/yyyy" format
+            event_d = str(event.event_date).split("-")
+            event_date = event_d[1] + "/" + event_d[2] + "/" + event_d[0]
+        }}
+        <tr>
+            <td class="text-center" scope="col">
+                {{=event.id}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=event_date}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=event_time}}
+            </td>
+            <td class="text-left hidden" scope="col">
+                {{=event.event_id.event_name}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=event.status}}
+            </td>
+            <td class="text-left hidden" scope="col">
+                {{=event.notes}}
+            </td>
+        </tr>
+        {{pass}}
+        <tr>
+            <td class="text-center" scope="col" style="width:70px; padding-top: 20px">
+                <a href="{{=URL(referer)}}"><p class="btn-primary">Back</p></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<br/>
+{{else:}}
+<h1>{{=no_result}}</h1>
+<br>
+<a href="{{=URL(referer)}}"><img src="{{=URL('static', 'images/back.png')}}"></a>
+{{pass}}

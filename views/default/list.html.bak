@@ -1,0 +1,200 @@
+{{extend 'layout.html'}}
+<table class="table">
+    <td class="sidebar">
+            <div>
+                        <form action="{{=URL("list")}}">
+                            <h4>
+                            Company
+                        </h4>
+                        <input list="company_name" name="company_name" placeholder="Select one">
+                        <datalist id="company_name">
+                            {{companies = db(db.company).select()}}
+                            {{for company in companies:}}
+                            <option value="{{=company.name}}"></option>
+                            {{pass}}
+                        </datalist><br>
+                        <label><input type="radio" name="option" value="location" checked>Location</label><br>
+                        <label><input type="radio" name="option" value="contacts">Contacts</label>
+                        <h4>
+                        Person
+                        </h4>
+                        <input list="person_name" name="person_name" placeholder="Select one">
+                        <datalist id="person_name">
+                            {{people = db(db.people).select()}}
+                            {{for person in people:}}
+                            <option value="{{=person.first_name + " " + person.last_name}}"></option>
+                            {{pass}}
+                        </datalist><br>
+                        <label><input type="radio" name="option" value="all">All events</label><br>
+                        <label><input type="radio" name="option" value="upcoming">Upcoming</label><br>
+                        <label><input type="radio" name="option" value="completed">Completed</label>
+                        <br>
+                        <br>
+                        <h5>
+                        Sort by
+                        </h5>
+                        <label><input type="radio" name="sort" value="name">Name</label><br>
+                        <label><input type="radio" name="sort" value="company">Company</label><br>
+                        <label><input type="radio" name="sort" value="city">City</label><br>
+                        <label><input type="radio" name="sort" value="State">State</label><br>
+                        <input type="submit" value="Submit Query">
+                    </form>
+            </div>
+        </td>
+        <td class="maincontent">
+            <table id="placeholder" class="maintable">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                </tr>
+                {{events = db(db.events.status.contains("upcoming")).select()}}
+                {{for row in events:}}
+                <tr>
+                    <td>
+                       {{=row.id}}
+                    </td>
+                    <td>
+                        {{=row.person_id.first_name}} {{=row.person_id.last_name}}
+                    </td>
+                    <td>
+                       {{=row.event_date}}
+                    </td>
+                    <td>
+                       {{=row.status}}
+                    </td>
+                    <td>
+                       {{=row.event_time}}
+                    </td>
+                </tr>
+                {{pass}}
+            </table>
+            {{if location_flag:}}
+            <table class="maintable">
+                <tr>
+                    <th>Id</th>
+                    <th>Parent Company</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip code</th>
+                    <th>Phone number</th>
+                </tr>
+               {{for row in table:}}
+                <tr>
+                    <td>
+                       {{=row.id}}
+                    </td>
+                    <td>
+                        {{=row.company_id.name}}
+                    </td>
+                    <td>
+                       {{=row.name}}
+                    </td>
+                    <td>
+                       {{=row.address}}
+                    </td>
+                    <td>
+                       {{=row.city}}
+                    </td>
+                    <td>
+                       {{=row.state_name}}
+                    </td>
+                    <td>
+                       {{=row.zip_code}}
+                    </td>
+                    <td>
+                       {{=row.main_phone_number}}
+                    </td>
+                </tr>
+                {{pass}}
+            </table>
+            <a href="{{=URL("locations")}}">List all locations</a>
+            {{pass}}
+            {{if people_flag:}}
+            <table class="maintable">
+                <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Office phone</th>
+                    <th>Role</th>
+                    <th>Birthday</th>
+                </tr>
+               {{for row in table:}}
+                <tr>
+                    <td>
+                       {{=row.id}}
+                    </td>
+                    <td>
+                       {{=row.first_name}}
+                    </td>
+                    <td>
+                       {{=row.last_name}}
+                    </td>
+                    <td>
+                       {{=row.company_id}}
+                    </td>
+                    <td>
+                       {{=row.people_type}}
+                    </td>
+                    <td>
+                       {{=row.email}}
+                    </td>
+                    <td>
+                       {{=row.phone_number}}
+                    </td>
+                    <td>
+                       {{=row.office_phone}}
+                    </td>
+                    <td>
+                       {{=row.role}}
+                    </td>
+                    <td>
+                       {{=row.birthday}}
+                    </td>
+                </tr>
+                {{pass}}
+            </table>
+            <a href="{{=URL("people")}}">List all People</a>
+            {{pass}}
+            {{if events_flag:}}
+            <table class="maintable">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                </tr>
+               {{for row in table:}}
+                <tr>
+                    <td>
+                       {{=row.id}}
+                    </td>
+                    <td>
+                        {{=row.person_id.first_name}} {{=row.person_id.last_name}}
+                    </td>
+                    <td>
+                       {{=row.event_date}}
+                    </td>
+                    <td>
+                       {{=row.status}}
+                    </td>
+                    <td>
+                       {{=row.event_time}}
+                    </td>
+                </tr>
+                {{pass}}
+            </table>
+            <a href="{{=URL("events")}}">List all events</a>
+            {{pass}}
+        </td>
+</table>

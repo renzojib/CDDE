@@ -1,0 +1,156 @@
+{{extend 'layout.html'}}
+{{if companies or people:}}
+<h1>Results for "{{=word}}"</h1>
+<div class="card bg-success text-white modif">
+<h4 class="card-header modif-back-col">
+    People
+</h4>
+<table>
+    <thead>
+        <tr>
+           <th class='under text-center' scope="col">
+               Id
+           </th>
+           <th class='under text-center' scope="col">
+               Name
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Company
+           </th>
+           <th class='under text-center' scope="col">
+               Phone
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Email
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Office Phone
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Role
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Address
+           </th>
+           <th class='under text-center' scope="col">
+               Birthday
+           </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{for person in people:}}
+        {{
+            #formatting date to "mm/dd/yyyy" format
+            bday = str(person.birthday).split("-")
+            birthday = bday[1] + "/" + bday[2] + "/" + bday[0]
+        }}
+        <tr>
+            <td class="text-center" scope="col">
+                {{=person.id}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=person.first_name}} {{=person.last_name}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=person.company_id.name}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=person.phone_number}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=person.email}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=person.office_phone}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=person.role}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=person.address}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=birthday}}
+            </td>
+            <td class="text-center" scope="col" style="width:70px">
+                <a href="{{=URL('default', 'search2', args=[person.id, person.first_name])}}"><img src="{{=URL("static","images/aface.png")}}" style="width:4vh"></a>
+            </td>
+        </tr>
+        {{pass}}
+    </tbody>
+</table>
+</div>
+<br/>
+<br/>
+<div class="card bg-danger text-white modif">
+<h4 class="card-header modif-back-col">
+    Companies
+</h4>
+<table>
+    <thead>
+        <tr>
+           <th class='under text-center' scope="col">
+               Id
+           </th>
+           <th class='under text-center' scope="col">
+               Name
+           </th>
+           <th class='under text-center  hidden' scope="col">
+               Industry
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Main Location
+           </th>
+           <th class='under text-center hidden' scope="col">
+               State Name
+           </th>
+           <th class='under text-center hidden' scope="col">
+               Website
+           </th>
+           <th class='under text-center' scope="col">
+               Main Phone No.
+           </th>
+           <th class='under text-center' scope="col">
+               Sales Representative
+           </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{for company in companies:}}
+        <tr>
+            <td class="text-center" scope="col">
+                {{=company.id}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=company.name}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=company.industry}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=company.main_location}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=company.state_name.state_name}}
+            </td>
+            <td class="text-center hidden" scope="col">
+                {{=company.website}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=company.main_phone_number}}
+            </td>
+            <td class="text-center" scope="col">
+                {{=company.sales_rep}}
+            </td>
+            <td class="text-center" scope="col" style="width:70px">
+                <a href="{{=URL('default', 'search3', args=[company.id, company.name])}}"><img src="{{=URL("static","images/locate.png")}}" style="width:4vh"></a>
+            </td>
+        </tr>
+        {{pass}}
+    </tbody>
+</table>
+</div>
+<br/>
+{{else:}}
+<h1>{{=no_result}}</h1>
+{{pass}}

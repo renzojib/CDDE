@@ -1,0 +1,167 @@
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+    margin-top: 20px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.2;
+    text-align: center;
+    color: white;
+}
+
+p {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.img {
+    height: 200px; 
+    width: 200px; 
+    padding: 20px;
+}
+
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);*/
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 8px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-left: 10%;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.card-body p{
+    text-align: center;
+    margin: 30px;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+.row > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+.bg-primary {
+    background-color: #0d6efd;
+}
+
+.bg-warning {
+    background-color: #ffc107;
+}
+
+.bg-success {
+    background-color: #198754;
+}
+
+.bg-danger {
+    background-color: #dc3545;
+}
+
+.bg-light {
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+}
+
+.py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.col-xl-3 {
+    flex: 0 0 auto;
+    width: 1000%;
+
+}
+.col-md-6 {
+    flex: 0 0 auto;
+    width: 90%;
+}
+
+/* General Mobile Views */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    p {
+        font-size: 10px;
+    }
+    .img {
+        height: 175px;
+        width: 175px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+/* iPhone 12/13 MAX and other variations */
+@media only screen and (min-device-width : 428px) and (max-device-width : 926px) {
+    p {
+        font-size: 10px;
+    }
+    .img {
+        height: 180px;
+        width: 180px;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+}
+
+/* Samsung Galaxy 20 Gens and other variations */
+@media only screen and (min-device-width : 412px) and (max-device-width : 915px) {
+    p {
+        font-size: 10px;
+    }
+    .img {
+        height: 180px;
+        width: 180px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}

@@ -1,0 +1,78 @@
+{{extend 'layout.html'}}
+{{if locations:}}
+<div class="card bg-success text-white modif">
+    <h4 class="card-header modif-back-col">
+        Locations for {{=name}}
+    </h4>
+    <table>
+        <thead>
+            <tr>
+               <th class='under text-center' scope="col">
+                   Id
+               </th>
+               <th class='under text-left' scope="col">
+                   Parent Company Name
+               </th>
+               <th class='under text-left' scope="col">
+                   Location Name
+               </th>
+               <th class='under text-left  hidden' scope="col">
+                   Address
+               </th>
+                <th class='under text-left  hidden' scope="col">
+                   City
+               </th>
+               <th class='under text-left hidden' scope="col">
+                   State Name
+               </th>
+               <th class='under text-center hidden' scope="col">
+                   Zip Code
+               </th>
+               <th class='under text-center' scope="col">
+                   Main Phone No.
+               </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{for location in locations:}}
+            <tr>
+                <td class="text-center" scope="col">
+                    {{=location.id}}
+                </td>
+                <td class="text-left" scope="col">
+                    {{=location.company_id.name}}
+                </td>
+                <td class="text-left" scope="col">
+                    {{=location.name}}
+                </td>
+                <td class="text-left hidden" scope="col">
+                    {{=location.address}}
+                </td>
+                <td class="text-left hidden" scope="col">
+                    {{=location.city}}
+                </td>
+                <td class="text-left hidden" scope="col">
+                    {{=location.state_name.state_name}}
+                </td>
+                <td class="text-center hidden" scope="col">
+                    {{=location.zip_code}}
+                </td>
+                <td class="text-center" scope="col">
+                    {{=location.main_phone_number}}
+                </td>
+            </tr>
+            {{pass}}
+            <tr>
+            <td class="text-center" scope="col" style="width:70px; padding-top: 20px">
+                <a href="{{=URL(referer)}}"><p class="btn-warning">Back</p></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+{{else:}}
+<h1>{{=no_result}}</h1>
+<br>
+<a href="{{=URL(referer)}}"><img src="{{=URL('static', 'images/back.png')}}"></a>
+{{pass}}

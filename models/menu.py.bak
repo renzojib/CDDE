@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
+
+# ----------------------------------------------------------------------------------------------------------------------
+# this is the main application menu add/remove items as required
+# ----------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------------------
+# provide shortcuts for development. you can remove everything below in production
+# ----------------------------------------------------------------------------------------------------------------------
+
+if not configuration.get('app.production'):
+    _app = request.application
+    response.menu = [
+        (T('Home'), False, URL('default', 'index')),
+         (T('Tables'), False, '#', [
+            (T('Companies'), False, URL('default', 'company'), []),
+            (T('Events'), False, URL('default', 'events'), []),
+            (T('Locations'), False, URL('default', 'locations'), []),
+            (T('People'), False, URL('default', 'people'), [])]),
+    ]
+
+if auth.has_membership(role='admin'):
+    response.menu.extend([
+        (T('Admin'), False, '#', [
+            (T('Design'), False, URL('admin', 'default', 'design/%s' % _app)),
+            (T('Event Type'), False, URL('default', 'event_type'), []),
+            (T('People Type'), False, URL('default', 'people_type'), []),
+            (T('States'), False, URL('default', 'states'), []),
+            (T('Social Media'), False, URL('default', 'social_media'), []),
+             ]),
+          ])
+response.menu.extend([
+        (T('About'), False, URL('default', 'about'), []),
+          ])
